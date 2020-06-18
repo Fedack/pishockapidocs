@@ -1,0 +1,535 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>PiShock API</title><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"><style>@import url('https://fonts.googleapis.com/css?family=Roboto:400,700|Inconsolata|Raleway:200');.hljs-comment,.hljs-title{color:#8e908c}.hljs-variable,.hljs-attribute,.hljs-tag,.hljs-regexp,.ruby .hljs-constant,.xml .hljs-tag .hljs-title,.xml .hljs-pi,.xml .hljs-doctype,.html .hljs-doctype,.css .hljs-id,.css .hljs-class,.css .hljs-pseudo{color:#c82829}.hljs-number,.hljs-preprocessor,.hljs-pragma,.hljs-built_in,.hljs-literal,.hljs-params,.hljs-constant{color:#f5871f}.ruby .hljs-class .hljs-title,.css .hljs-rules .hljs-attribute{color:#eab700}.hljs-string,.hljs-value,.hljs-inheritance,.hljs-header,.ruby .hljs-symbol,.xml .hljs-cdata{color:#718c00}.css .hljs-hexcolor{color:#3e999f}.hljs-function,.python .hljs-decorator,.python .hljs-title,.ruby .hljs-function .hljs-title,.ruby .hljs-title .hljs-keyword,.perl .hljs-sub,.javascript .hljs-title,.coffeescript .hljs-title{color:#4271ae}.hljs-keyword,.javascript .hljs-function{color:#8959a8}.hljs{display:block;background:white;color:#4d4d4c;padding:.5em}.coffeescript .javascript,.javascript .xml,.tex .hljs-formula,.xml .javascript,.xml .vbscript,.xml .css,.xml .hljs-cdata{opacity:.5}.right .hljs-comment{color:#969896}.right .css .hljs-class,.right .css .hljs-id,.right .css .hljs-pseudo,.right .hljs-attribute,.right .hljs-regexp,.right .hljs-tag,.right .hljs-variable,.right .html .hljs-doctype,.right .ruby .hljs-constant,.right .xml .hljs-doctype,.right .xml .hljs-pi,.right .xml .hljs-tag .hljs-title{color:#c66}.right .hljs-built_in,.right .hljs-constant,.right .hljs-literal,.right .hljs-number,.right .hljs-params,.right .hljs-pragma,.right .hljs-preprocessor{color:#de935f}.right .css .hljs-rule .hljs-attribute,.right .ruby .hljs-class .hljs-title{color:#f0c674}.right .hljs-header,.right .hljs-inheritance,.right .hljs-name,.right .hljs-string,.right .hljs-value,.right .ruby .hljs-symbol,.right .xml .hljs-cdata{color:#b5bd68}.right .css .hljs-hexcolor,.right .hljs-title{color:#8abeb7}.right .coffeescript .hljs-title,.right .hljs-function,.right .javascript .hljs-title,.right .perl .hljs-sub,.right .python .hljs-decorator,.right .python .hljs-title,.right .ruby .hljs-function .hljs-title,.right .ruby .hljs-title .hljs-keyword{color:#81a2be}.right .hljs-keyword,.right .javascript .hljs-function{color:#b294bb}.right .hljs{display:block;overflow-x:auto;background:#1d1f21;color:#c5c8c6;padding:.5em;-webkit-text-size-adjust:none}.right .coffeescript .javascript,.right .javascript .xml,.right .tex .hljs-formula,.right .xml .css,.right .xml .hljs-cdata,.right .xml .javascript,.right .xml .vbscript{opacity:.5}body{color:#c8c8c8;background:#1e1e1e;font:400 14px / 1.42 'Roboto',Helvetica,sans-serif}header{border-bottom:1px solid #303030;margin-bottom:12px}h1,h2,h3,h4,h5{color:#c8c8c8;margin:12px 0}h1 .permalink,h2 .permalink,h3 .permalink,h4 .permalink,h5 .permalink{margin-left:0;opacity:0;transition:opacity .25s ease}h1:hover .permalink,h2:hover .permalink,h3:hover .permalink,h4:hover .permalink,h5:hover .permalink{opacity:1}.triple h1 .permalink,.triple h2 .permalink,.triple h3 .permalink,.triple h4 .permalink,.triple h5 .permalink{opacity:.15}.triple h1:hover .permalink,.triple h2:hover .permalink,.triple h3:hover .permalink,.triple h4:hover .permalink,.triple h5:hover .permalink{opacity:.15}h1{font:200 36px 'Raleway',Helvetica,sans-serif;font-size:36px}h2{font:200 36px 'Raleway',Helvetica,sans-serif;font-size:30px}h3{font-size:100%;text-transform:uppercase}h5{font-size:100%;font-weight:normal}p{margin:0 0 10px}p.choices{line-height:1.6}a{color:white;text-decoration:none}li p{margin:0}hr.split{border:0;height:1px;width:100%;padding-left:6px;margin:12px auto;background-image:linear-gradient(to right, rgba(200,200,200,0) 20%, rgba(200,200,200,0.2) 51.4%, rgba(30,30,30,0.2) 51.4%, rgba(30,30,30,0) 80%)}dl dt{float:left;width:130px;clear:left;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:700}dl dd{margin-left:150px}blockquote{color:rgba(200,200,200,0.5);font-size:15.5px;padding:10px 20px;margin:12px 0;border-left:5px solid #2b3237}blockquote p:last-child{margin-bottom:0}pre{background-color:#202529;padding:12px;border:1px solid #424c54;border-radius:6px;overflow:auto}pre code{color:#c8c8c8;background-color:transparent;padding:0;border:none}code{color:#ddd;background-color:#373b40;font:'Inconsolata',monospace;padding:1px 4px;border:1px solid #424c54;border-radius:3px}ul,ol{padding-left:2em}table{border-collapse:collapse;border-spacing:0;margin-bottom:12px}table tr:nth-child(2n){background-color:#191919}table th,table td{padding:6px 12px;border:1px solid #040404}.text-muted{opacity:.5}.note,.warning{padding:.3em 1em;margin:1em 0;border-radius:2px;font-size:90%}.note h1,.warning h1,.note h2,.warning h2,.note h3,.warning h3,.note h4,.warning h4,.note h5,.warning h5,.note h6,.warning h6{font-family:200 36px 'Raleway',Helvetica,sans-serif;font-size:135%;font-weight:500}.note p,.warning p{margin:.5em 0}.note{color:#c8c8c8;background-color:#232b2d;border-left:4px solid #5bc0de}.note h1,.note h2,.note h3,.note h4,.note h5,.note h6{color:#5bc0de}.warning{color:#c8c8c8;background-color:#2c1f1f;border-left:4px solid #e9322d}.warning h1,.warning h2,.warning h3,.warning h4,.warning h5,.warning h6{color:#e9322d}header{margin-top:24px}nav{position:fixed;top:24px;bottom:0;overflow-y:auto}nav .resource-group{padding:0}nav .resource-group .heading{position:relative}nav .resource-group .heading .chevron{position:absolute;top:12px;right:12px;opacity:.5}nav .resource-group .heading a{display:block;color:#c8c8c8;opacity:.7;border-left:2px solid transparent;margin:0}nav .resource-group .heading a:hover{text-decoration:none;background-color:bad-color;border-left:2px solid #c8c8c8}nav ul{list-style-type:none;padding-left:0}nav ul a{display:block;font-size:13px;color:rgba(200,200,200,0.7);padding:8px 12px;border-top:1px solid #202020;border-left:2px solid transparent;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}nav ul a:hover{text-decoration:none;background-color:bad-color;border-left:2px solid #c8c8c8}nav ul>li{margin:0}nav ul>li:first-child{margin-top:-12px}nav ul>li:last-child{margin-bottom:-12px}nav ul ul a{padding-left:24px}nav ul ul li{margin:0}nav ul ul li:first-child{margin-top:0}nav ul ul li:last-child{margin-bottom:0}nav>div>div>ul>li:first-child>a{border-top:none}.preload *{transition:none !important}.pull-left{float:left}.pull-right{float:right}.badge{display:inline-block;float:right;min-width:10px;min-height:14px;padding:3px 7px;font-size:12px;color:#fff;background-color:#303030;border-radius:10px;margin:-2px 0}.badge.get{color:white;background-color:#5bc0de}.badge.head{color:white;background-color:#5bc0de}.badge.options{color:white;background-color:#5bc0de}.badge.put{color:white;background-color:#f89406}.badge.patch{color:white;background-color:#f89406}.badge.post{color:white;background-color:#f4d600}.badge.delete{color:white;background-color:#ee5f5b}.collapse-button{float:right}.collapse-button .close{display:none;color:white;cursor:pointer}.collapse-button .open{color:white;cursor:pointer}.collapse-button.show .close{display:inline}.collapse-button.show .open{display:none}.collapse-content{max-height:0;overflow:hidden;transition:max-height .3s ease-in-out}nav{width:220px}.container{max-width:940px;margin-left:auto;margin-right:auto}.container .row .content{margin-left:244px;width:696px}.container .row:after{content:'';display:block;clear:both}.container-fluid nav{width:22%}.container-fluid .row .content{margin-left:24%}.container-fluid.triple nav{width:16.5%;padding-right:1px}.container-fluid.triple .row .content{position:relative;margin-left:16.5%;padding-left:24px}.middle:before,.middle:after{content:'';display:table}.middle:after{clear:both}.middle{box-sizing:border-box;width:51.5%;padding-right:12px}.right{box-sizing:border-box;float:right;width:48.5%;padding-left:12px}.right a{color:#666}.right h1,.right h2,.right h3,.right h4,.right h5,.right p,.right div{color:#1e1e1e}.right pre{background-color:#f7f6f5;border:1px solid #f7f6f5}.right pre code{color:#333}.right .description{margin-top:12px}.triple .resource-heading{font-size:125%}.definition{margin-top:12px;margin-bottom:12px}.definition .method{font-weight:bold}.definition .method.get{color:#2e98b8}.definition .method.head{color:#2e98b8}.definition .method.options{color:#2e98b8}.definition .method.post{color:#b8a72e}.definition .method.put{color:#b87f2e}.definition .method.patch{color:#b87f2e}.definition .method.delete{color:#b8322e}.definition .uri{word-break:break-all;word-wrap:break-word}.definition .hostname{opacity:.5}.example-names{background-color:#eee;padding:12px;border-radius:6px}.example-names .tab-button{cursor:pointer;color:#c8c8c8;border:1px solid #ddd;padding:6px;margin-left:12px}.example-names .tab-button.active{background-color:#d5d5d5}.right .example-names{background-color:#adaaa6}.right .example-names .tab-button{color:#1e1e1e;border:1px solid #d8d4cf;border-radius:6px}.right .example-names .tab-button.active{background-color:#95918b}#nav-background{position:fixed;left:0;top:0;bottom:0;width:16.5%;padding-right:14.4px;background-color:#272b30;border-right:1px solid #272b30;z-index:-1}#right-panel-background{position:absolute;right:-12px;top:-12px;bottom:-12px;width:48.6%;background-color:#d8d4cf;z-index:-1}@media (max-width:1200px){nav{width:198px}.container{max-width:840px}.container .row .content{margin-left:224px;width:606px}}@media (max-width:992px){nav{width:169.4px}.container{max-width:720px}.container .row .content{margin-left:194px;width:526px}}@media (max-width:768px){nav{display:none}.container{width:95%;max-width:none}.container .row .content,.container-fluid .row .content,.container-fluid.triple .row .content{margin-left:auto;margin-right:auto;width:95%}#nav-background{display:none}#right-panel-background{width:48.6%}}.back-to-top{position:fixed;z-index:1;bottom:0;right:24px;padding:4px 8px;color:rgba(200,200,200,0.5);background-color:#303030;text-decoration:none !important;border-top:1px solid #202020;border-left:1px solid #202020;border-right:1px solid #202020;border-top-left-radius:3px;border-top-right-radius:3px}.resource-group{padding:12px;margin-bottom:12px;background-color:#1e1e1e;border:1px solid #202020;border-radius:6px}.resource-group h2.group-heading,.resource-group .heading a{padding:12px;margin:-12px -12px 12px -12px;background-color:#303030;border-bottom:1px solid #202020;border-top-left-radius:6px;border-top-right-radius:6px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden}.triple .content .resource-group{padding:0;border:none}.triple .content .resource-group h2.group-heading,.triple .content .resource-group .heading a{margin:0 0 12px 0;border:1px solid #202020}nav .resource-group .heading a{padding:12px;margin-bottom:0}nav .resource-group .collapse-content{padding:0}.action{margin-bottom:12px;padding:12px 12px 0 12px;overflow:hidden;border:1px solid transparent;border-radius:6px}.action h4.action-heading{padding:6px 12px;margin:-12px -12px 12px -12px;border-bottom:1px solid transparent;border-top-left-radius:6px;border-top-right-radius:6px;overflow:hidden}.action h4.action-heading .name{float:right;font-weight:normal;padding:6px 0}.action h4.action-heading .method{padding:6px 12px;margin-right:12px;border-radius:3px;display:inline-block}.action h4.action-heading .method.get{color:#fff;background-color:#2390b0}.action h4.action-heading .method.head{color:#fff;background-color:#2390b0}.action h4.action-heading .method.options{color:#fff;background-color:#2390b0}.action h4.action-heading .method.put{color:#fff;background-color:#945904}.action h4.action-heading .method.patch{color:#fff;background-color:#945904}.action h4.action-heading .method.post{color:#fff;background-color:#8e7d00}.action h4.action-heading .method.delete{color:#fff;background-color:#ce1a15}.action h4.action-heading code{color:black;background-color:rgba(255,255,255,0.7);border-color:transparent;font-weight:normal;word-break:break-all;display:inline-block;margin-top:2px}.action dl.inner{padding-bottom:2px}.action .title{border-bottom:1px solid #1e1e1e;margin:0 -12px -1px -12px;padding:12px}.action.get{border-color:#202020}.action.get h4.action-heading{color:#2390b0;background:#5bc0de;border-bottom-color:#202020}.action.head{border-color:#202020}.action.head h4.action-heading{color:#2390b0;background:#5bc0de;border-bottom-color:#202020}.action.options{border-color:#202020}.action.options h4.action-heading{color:#2390b0;background:#5bc0de;border-bottom-color:#202020}.action.post{border-color:#202020}.action.post h4.action-heading{color:#8e7d00;background:#f4d600;border-bottom-color:#202020}.action.put{border-color:#202020}.action.put h4.action-heading{color:#945904;background:#f89406;border-bottom-color:#202020}.action.patch{border-color:#202020}.action.patch h4.action-heading{color:#945904;background:#f89406;border-bottom-color:#202020}.action.delete{border-color:#202020}.action.delete h4.action-heading{color:#ce1a15;background:#ee5f5b;border-bottom-color:#202020}.hljs-comment,.hljs-quote{color:#9e8f9e}.hljs-attribute,.hljs-link,.hljs-name,.hljs-regexp,.hljs-selector-class,.hljs-selector-id,.hljs-tag,.hljs-template-variable,.hljs-variable{color:#ca402b}.hljs-built_in,.hljs-literal,.hljs-meta,.hljs-number,.hljs-params,.hljs-type{color:#a65926}.hljs-bullet,.hljs-string,.hljs-symbol{color:#918b3b}.hljs-section,.hljs-title{color:#516aec}.hljs-keyword,.hljs-selector-tag{color:#7b59c0}.hljs{display:block;overflow-x:auto;background:#1b181b;color:#ab9bab;padding:.5em}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}.right .hljs-comment,.right .hljs-quote{color:#776977}.right .hljs-attribute,.right .hljs-link,.right .hljs-name,.right .hljs-regexp,.right .hljs-selector-class,.right .hljs-selector-id,.right .hljs-tag,.right .hljs-template-variable,.right .hljs-variable{color:#ca402b}.right .hljs-built_in,.right .hljs-literal,.right .hljs-meta,.right .hljs-number,.right .hljs-params,.right .hljs-type{color:#a65926}.right .hljs-bullet,.right .hljs-string,.right .hljs-symbol{color:#918b3b}.right .hljs-section,.right .hljs-title{color:#516aec}.right .hljs-keyword,.right .hljs-selector-tag{color:#7b59c0}.right .hljs{display:block;overflow-x:auto;background:#f7f3f7;color:#695d69;padding:.5em}.right .hljs-emphasis{font-style:italic}.right .hljs-strong{font-weight:700}</style></head><body class="preload"><a href="#top" class="text-muted back-to-top"><i class="fa fa-toggle-up"></i>&nbsp;Back to top</a><div class="container"><div class="row"><nav><div class="resource-group"><div class="heading"><div class="chevron"><i class="open fa fa-angle-down"></i></div><a href="#top">Overview</a></div><div class="collapse-content"><ul><li><a href="#header-disclaimer">Disclaimer</a></li><li><a href="#header-authenticating">Authenticating</a></li></ul></div></div><div class="resource-group"><div class="heading"><div class="chevron"><i class="open fa fa-angle-down"></i></div><a href="#shock-collar-control">Shock Collar Control</a></div><div class="collapse-content"><ul><li><a href="#header-operations">Operations</a></li><li><a href="#shock-collar-control-shock-post"><span class="badge post"><i class="fa fa-plus"></i></span>Shock</a></li><li><a href="#shock-collar-control-vibrate-post"><span class="badge post"><i class="fa fa-plus"></i></span>Vibrate</a></li><li><a href="#shock-collar-control-beep-post"><span class="badge post"><i class="fa fa-plus"></i></span>Beep</a></li></ul></div></div><p style="text-align: center; word-wrap: break-word;"><a href="https://do.pishock.com/api/apioperate">https://do.pishock.com/api/apioperate</a></p></nav><div class="content"><header><h1 id="top">PiShock API</h1></header><p>A JSON API for controlling shock collars (and soon other toys) with <a href="https://pishock.com">PiShock</a>.</p>
+<p><a href="https://pishock.com"><strong>PiShock can be purchased at PiShock.com</strong></a></p>
+<div class="warning">
+<h3 id="header-disclaimer">Disclaimer <a class="permalink" href="#header-disclaimer" aria-hidden="true">¶</a></h3>
+<p>PiShock is not responsible for any harm caused by misuse of the shock collar sold along with the PiShock device. We do not recommend putting any kind of electrical device near the heart or use if you have a heart condition. Shock collars are not meant for use on humans and can cause serious injury including cardiac events.</p>
+</div>
+<div class="note">
+<h2 id="header-authenticating">Authenticating <a class="permalink" href="#header-authenticating" aria-hidden="true">¶</a></h2>
+<p>To authenticate and select the shocker you must pass three variables: <em>Username</em>, <em>Apikey</em>, &amp; <em>Code</em>.</p>
+<p>Addtionally, all API queries must contain the <em>Name</em> variable, representing the script/person controlling the device.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">Key</th>
+<th>Value Type</th>
+<th>Example</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">Username</td>
+<td>string</td>
+<td>puppy73</td>
+<td>Username you use to log into <a href="http://PiShock.com">PiShock.com</a>. Can be found in the <strong>Account</strong> section of the website.</td>
+</tr>
+<tr>
+<td style="text-align:right">Apikey</td>
+<td>string</td>
+<td>5c678926-d19e-4f86-42ad-21f5a76126db</td>
+<td>API Key generated on <a href="http://PiShock.com">PiShock.com</a> Can be found in the <strong>Account</strong> section of the website.</td>
+</tr>
+<tr>
+<td style="text-align:right">Code</td>
+<td>string</td>
+<td>17519CD8GAP</td>
+<td>Sharecode generated on <a href="http://PiShock.com">PiShock.com</a>. <em>Limitations can be set when generating the code.</em></td>
+</tr>
+<tr>
+<td style="text-align:right">Name</td>
+<td>string</td>
+<td>TG_Bot_Script</td>
+<td>Name of what sent the commands. This will showup in the PiShock logs on the website.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="shock-collar-control" class="resource-group"><h2 class="group-heading">Shock Collar Control <a href="#shock-collar-control" class="permalink">&para;</a></h2><div class="note">
+<h2 id="header-operations">Operations <a class="permalink" href="#header-operations" aria-hidden="true">¶</a></h2>
+<p>The shock collar included with PiShock has three operations: shock, vibrate, and beep. You specify the operation using the <em>Op</em> variable.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">Key</th>
+<th>Value</th>
+<th>Operation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">Op</td>
+<td>0</td>
+<td>Shock</td>
+</tr>
+<tr>
+<td style="text-align:right">Op</td>
+<td>1</td>
+<td>Vibrate</td>
+</tr>
+<tr>
+<td style="text-align:right">Op</td>
+<td>2</td>
+<td>Beep</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="shock-collar-control-shock" class="resource"><h3 class="resource-heading">Shock <a href="#shock-collar-control-shock" class="permalink">&nbsp;&para;</a></h3><p>This allows you to activate the shock function of the shock collar. It will shock the wearer with a specified <em>duration</em> and <em>intensity</em>.</p>
+<div id="shock-collar-control-shock-post" class="action post"><h4 class="action-heading"><div class="name">Shock</div><a href="#shock-collar-control-shock-post" class="method post">POST</a><code class="uri">/</code></h4><p>The following variables must be set to send a shock command.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">Key</th>
+<th>Value Type</th>
+<th>Example</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">Op</td>
+<td>integer</td>
+<td>0</td>
+<td>Activate the shock function.</td>
+</tr>
+<tr>
+<td style="text-align:right">Duration</td>
+<td>integer (1 - 15)</td>
+<td>2</td>
+<td>An integer representing the number of seconds to shock the wearer. Must be between 1 and 15.</td>
+</tr>
+<tr>
+<td style="text-align:right">Intensity</td>
+<td>integer (1 - 100)</td>
+<td>7</td>
+<td>An integer representing the intensity of shock. Must be between 1 and 100.</td>
+</tr>
+</tbody>
+</table>
+<pre><code>Example: curl -<span class="hljs-keyword">d</span> '{<span class="hljs-string">"Username"</span>:<span class="hljs-string">"puppy73"</span>,<span class="hljs-string">"Name"</span>:<span class="hljs-string">"TG_Bot_Script"</span>,<span class="hljs-string">"Code"</span>:<span class="hljs-string">"17519CD8GAP"</span>,<span class="hljs-string">"Intensity"</span>:<span class="hljs-string">"6"</span>,<span class="hljs-string">"Duration"</span>:<span class="hljs-string">"1"</span>,<span class="hljs-string">"Apikey"</span>:<span class="hljs-string">"5c678926-d19e-4f86-42ad-21f5a76126db"</span>,<span class="hljs-string">"Op"</span>:<span class="hljs-string">"0"</span>}' -<span class="hljs-keyword">H</span> 'Content-<span class="hljs-keyword">Type</span>: application/json' https:<span class="hljs-comment">//do.pishock.com/api/apioperate</span></code></pre>
+<p>See the Response [200] section below for possible responses and error descriptions.</p>
+<h4>Example URI</h4><div class="definition"><span class="method post">POST</span>&nbsp;<span class="uri"><span class="hostname">https://do.pishock.com/api/apioperate</span>/</span></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><div class="description"><table>
+<thead>
+<tr>
+<th style="text-align:right">Response Message</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">Operation Succeeded.</td>
+<td>The shock command was sent successfully.</td>
+</tr>
+<tr>
+<td style="text-align:right">This code doesn’t exist.</td>
+<td>The specified share code could not be found. Make sure you create and copy an active share code from the PiShock website.</td>
+</tr>
+<tr>
+<td style="text-align:right">Not Authorized.</td>
+<td>The specified username or apikey is not correct (or your account has not been activated).</td>
+</tr>
+<tr>
+<td style="text-align:right">Shocker is Paused, unable to send command.</td>
+<td>The shocker is paused (from the <a href="http://PiShock.com">PiShock.com</a> web panel).</td>
+</tr>
+<tr>
+<td style="text-align:right">Device currently not connected.</td>
+<td>The PiShock is offline.</td>
+</tr>
+<tr>
+<td style="text-align:right">This share code has already been used by somebody else.</td>
+<td>Someone (or something) else is using the specified share code. Generate a new one.</td>
+</tr>
+<tr>
+<td style="text-align:right">Unknown Op, use 0 for shock, 1 for vibrate and 2 for beep</td>
+<td>Invalid Op code specified. Must be 0, 1, or 2.</td>
+</tr>
+<tr>
+<td style="text-align:right">Intensity must be between 0 and {maxint}</td>
+<td>The specified intensity was outside the permitted range.</td>
+</tr>
+<tr>
+<td style="text-align:right">Duration must be between 1 and {maxdur}</td>
+<td>The specified duration was outside the permitted range.</td>
+</tr>
+</tbody>
+</table>
+</div><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">text/plain</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>Operation Succeeded.</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="shock-collar-control-vibrate" class="resource"><h3 class="resource-heading">Vibrate <a href="#shock-collar-control-vibrate" class="permalink">&nbsp;&para;</a></h3><p>This allows you to activate the vibration function of the shock collar. It will vibrate the shocker with a specified <em>duration</em> and <em>intensity</em>.</p>
+<div id="shock-collar-control-vibrate-post" class="action post"><h4 class="action-heading"><div class="name">Vibrate</div><a href="#shock-collar-control-vibrate-post" class="method post">POST</a><code class="uri">/ </code></h4><p>The following variables must be set to send a vibrate command.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">Key</th>
+<th>Value Type</th>
+<th>Example</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">Op</td>
+<td>integer</td>
+<td>1</td>
+<td>Activate the vibrate function.</td>
+</tr>
+<tr>
+<td style="text-align:right">Duration</td>
+<td>integer</td>
+<td>7</td>
+<td>An integer representing the number of seconds to vibrate the shocker.</td>
+</tr>
+<tr>
+<td style="text-align:right">Intensity</td>
+<td>integer (1 - 100)</td>
+<td>7</td>
+<td>An integer representing the intensity of vibration. Must be between 1 and 100.</td>
+</tr>
+</tbody>
+</table>
+<pre><code>Example: curl -<span class="hljs-keyword">d</span> '{<span class="hljs-string">"Username"</span>:<span class="hljs-string">"puppy73"</span>,<span class="hljs-string">"Name"</span>:<span class="hljs-string">"TG_Bot_Test"</span>,<span class="hljs-string">"Code"</span>:<span class="hljs-string">"17519CD8GAP"</span>,<span class="hljs-string">"Intensity"</span>:<span class="hljs-string">"50"</span>,<span class="hljs-string">"Duration"</span>:<span class="hljs-string">"1"</span>,<span class="hljs-string">"Apikey"</span>:<span class="hljs-string">"5c678926-d19e-4f86-42ad-21f5a76126db"</span>,<span class="hljs-string">"Op"</span>:<span class="hljs-string">"1"</span>}' -<span class="hljs-keyword">H</span> 'Content-<span class="hljs-keyword">Type</span>: application/json' https:<span class="hljs-comment">//do.pishock.com/api/apioperate</span></code></pre>
+<p>See the Response [200] section below for possible responses and error descriptions.</p>
+<h4>Example URI</h4><div class="definition"><span class="method post">POST</span>&nbsp;<span class="uri"><span class="hostname">https://do.pishock.com/api/apioperate</span>/ </span></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><div class="description"><table>
+<thead>
+<tr>
+<th style="text-align:right">Response Message</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">Operation Succeeded.</td>
+<td>The vibrate command was sent successfully.</td>
+</tr>
+<tr>
+<td style="text-align:right">This code doesn’t exist.</td>
+<td>The specified share code could not be found. Make sure you create and copy an active share code from the PiShock website.</td>
+</tr>
+<tr>
+<td style="text-align:right">Not Authorized.</td>
+<td>The specified username or apikey is not correct (or your account has not been activated).</td>
+</tr>
+<tr>
+<td style="text-align:right">Shocker is Paused, unable to send command.</td>
+<td>The shocker is paused (from the <a href="http://PiShock.com">PiShock.com</a> web panel).</td>
+</tr>
+<tr>
+<td style="text-align:right">Device currently not connected.</td>
+<td>The PiShock is offline.</td>
+</tr>
+<tr>
+<td style="text-align:right">This share code has already been used by somebody else.</td>
+<td>Someone (or something) else is using the specified share code. Generate a new one.</td>
+</tr>
+<tr>
+<td style="text-align:right">Unknown Op, use 0 for shock, 1 for vibrate and 2 for beep</td>
+<td>Invalid Op code specified. Must be 0, 1, or 2.</td>
+</tr>
+<tr>
+<td style="text-align:right">Intensity must be between 0 and {maxint}</td>
+<td>The specified intensity was outside the permitted range.</td>
+</tr>
+<tr>
+<td style="text-align:right">Duration must be between 1 and {maxdur}</td>
+<td>The specified duration was outside the permitted range.</td>
+</tr>
+</tbody>
+</table>
+</div><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">text/plain</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>Operation Succeeded.</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="shock-collar-control-beep" class="resource"><h3 class="resource-heading">Beep <a href="#shock-collar-control-beep" class="permalink">&nbsp;&para;</a></h3><p>This allows you to activate the beep function of the shock collar. It will cause the shocker to beep with a specified <em>duration</em> and <em>intensity</em>.</p>
+<div id="shock-collar-control-beep-post" class="action post"><h4 class="action-heading"><div class="name">Beep</div><a href="#shock-collar-control-beep-post" class="method post">POST</a><code class="uri">/  </code></h4><p>The following variables must be set to send a beep command.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">Key</th>
+<th>Value Type</th>
+<th>Example</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">Op</td>
+<td>integer</td>
+<td>2</td>
+<td>Activate the vibrate function.</td>
+</tr>
+<tr>
+<td style="text-align:right">Duration</td>
+<td>integer</td>
+<td>3</td>
+<td>An integer representing the number of seconds to make the shocker beep.</td>
+</tr>
+</tbody>
+</table>
+<pre><code>Example: curl -<span class="hljs-keyword">d</span> '{<span class="hljs-string">"Username"</span>:<span class="hljs-string">"puppy73"</span>,<span class="hljs-string">"Name"</span>:<span class="hljs-string">"TG_Bot_Test"</span>,<span class="hljs-string">"Code"</span>:<span class="hljs-string">"17519CD8GAP"</span>,<span class="hljs-string">"Duration"</span>:<span class="hljs-string">"3"</span>,<span class="hljs-string">"Apikey"</span>:<span class="hljs-string">"5c678926-d19e-4f86-42ad-21f5a76126db"</span>,<span class="hljs-string">"Op"</span>:<span class="hljs-string">"2"</span>}' -<span class="hljs-keyword">H</span> 'Content-<span class="hljs-keyword">Type</span>: application/json' https:<span class="hljs-comment">//do.pishock.com/api/apioperate</span></code></pre>
+<p>See the Response [200] section below for possible responses and error descriptions.</p>
+<h4>Example URI</h4><div class="definition"><span class="method post">POST</span>&nbsp;<span class="uri"><span class="hostname">https://do.pishock.com/api/apioperate</span>/  </span></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><div class="description"><table>
+<thead>
+<tr>
+<th style="text-align:right">Response Message</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">Operation Succeeded.</td>
+<td>The beep command was sent successfully.</td>
+</tr>
+<tr>
+<td style="text-align:right">This code doesn’t exist.</td>
+<td>The specified share code could not be found. Make sure you create and copy an active share code from the PiShock website.</td>
+</tr>
+<tr>
+<td style="text-align:right">Not Authorized.</td>
+<td>The specified username or apikey is not correct (or your account has not been activated).</td>
+</tr>
+<tr>
+<td style="text-align:right">Shocker is Paused, unable to send command.</td>
+<td>The shocker is paused (from the <a href="http://PiShock.com">PiShock.com</a> web panel).</td>
+</tr>
+<tr>
+<td style="text-align:right">Device currently not connected.</td>
+<td>The PiShock is offline.</td>
+</tr>
+<tr>
+<td style="text-align:right">This share code has already been used by somebody else.</td>
+<td>Someone (or something) else is using the specified share code. Generate a new one.</td>
+</tr>
+<tr>
+<td style="text-align:right">Unknown Op, use 0 for shock, 1 for vibrate and 2 for beep</td>
+<td>Invalid Op code specified. Must be 0, 1, or 2.</td>
+</tr>
+<tr>
+<td style="text-align:right">Intensity must be between 0 and {maxint}</td>
+<td>The specified intensity was outside the permitted range.</td>
+</tr>
+<tr>
+<td style="text-align:right">Duration must be between 1 and {maxdur}</td>
+<td>The specified duration was outside the permitted range.</td>
+</tr>
+</tbody>
+</table>
+</div><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">text/plain</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>Operation Succeeded.</code></pre><div style="height: 1px;"></div></div></div></div></div></section></div></div></div><p style="text-align: center;" class="text-muted">Generated by&nbsp;<a href="https://github.com/danielgtaylor/aglio" class="aglio">aglio</a>&nbsp;on 17 Jun 2020</p><script>/* eslint-env browser */
+/* eslint quotes: [2, "single"] */
+'use strict';
+
+/*
+  Determine if a string ends with another string.
+*/
+function endsWith(str, suffix) {
+    return str.indexOf(suffix, str.length - suffix.length) !== -1;
+}
+
+/*
+  Get a list of direct child elements by class name.
+*/
+function childrenByClass(element, name) {
+  var filtered = [];
+
+  for (var i = 0; i < element.children.length; i++) {
+    var child = element.children[i];
+    var classNames = child.className.split(' ');
+    if (classNames.indexOf(name) !== -1) {
+      filtered.push(child);
+    }
+  }
+
+  return filtered;
+}
+
+/*
+  Get an array [width, height] of the window.
+*/
+function getWindowDimensions() {
+  var w = window,
+      d = document,
+      e = d.documentElement,
+      g = d.body,
+      x = w.innerWidth || e.clientWidth || g.clientWidth,
+      y = w.innerHeight || e.clientHeight || g.clientHeight;
+
+  return [x, y];
+}
+
+/*
+  Collapse or show a request/response example.
+*/
+function toggleCollapseButton(event) {
+    var button = event.target.parentNode;
+    var content = button.parentNode.nextSibling;
+    var inner = content.children[0];
+
+    if (button.className.indexOf('collapse-button') === -1) {
+      // Clicked without hitting the right element?
+      return;
+    }
+
+    if (content.style.maxHeight && content.style.maxHeight !== '0px') {
+        // Currently showing, so let's hide it
+        button.className = 'collapse-button';
+        content.style.maxHeight = '0px';
+    } else {
+        // Currently hidden, so let's show it
+        button.className = 'collapse-button show';
+        content.style.maxHeight = inner.offsetHeight + 12 + 'px';
+    }
+}
+
+function toggleTabButton(event) {
+    var i, index;
+    var button = event.target;
+
+    // Get index of the current button.
+    var buttons = childrenByClass(button.parentNode, 'tab-button');
+    for (i = 0; i < buttons.length; i++) {
+        if (buttons[i] === button) {
+            index = i;
+            button.className = 'tab-button active';
+        } else {
+            buttons[i].className = 'tab-button';
+        }
+    }
+
+    // Hide other tabs and show this one.
+    var tabs = childrenByClass(button.parentNode.parentNode, 'tab');
+    for (i = 0; i < tabs.length; i++) {
+        if (i === index) {
+            tabs[i].style.display = 'block';
+        } else {
+            tabs[i].style.display = 'none';
+        }
+    }
+}
+
+/*
+  Collapse or show a navigation menu. It will not be hidden unless it
+  is currently selected or `force` has been passed.
+*/
+function toggleCollapseNav(event, force) {
+    var heading = event.target.parentNode;
+    var content = heading.nextSibling;
+    var inner = content.children[0];
+
+    if (heading.className.indexOf('heading') === -1) {
+      // Clicked without hitting the right element?
+      return;
+    }
+
+    if (content.style.maxHeight && content.style.maxHeight !== '0px') {
+      // Currently showing, so let's hide it, but only if this nav item
+      // is already selected. This prevents newly selected items from
+      // collapsing in an annoying fashion.
+      if (force || window.location.hash && endsWith(event.target.href, window.location.hash)) {
+        content.style.maxHeight = '0px';
+      }
+    } else {
+      // Currently hidden, so let's show it
+      content.style.maxHeight = inner.offsetHeight + 12 + 'px';
+    }
+}
+
+/*
+  Refresh the page after a live update from the server. This only
+  works in live preview mode (using the `--server` parameter).
+*/
+function refresh(body) {
+    document.querySelector('body').className = 'preload';
+    document.body.innerHTML = body;
+
+    // Re-initialize the page
+    init();
+    autoCollapse();
+
+    document.querySelector('body').className = '';
+}
+
+/*
+  Determine which navigation items should be auto-collapsed to show as many
+  as possible on the screen, based on the current window height. This also
+  collapses them.
+*/
+function autoCollapse() {
+  var windowHeight = getWindowDimensions()[1];
+  var itemsHeight = 64; /* Account for some padding */
+  var itemsArray = Array.prototype.slice.call(
+    document.querySelectorAll('nav .resource-group .heading'));
+
+  // Get the total height of the navigation items
+  itemsArray.forEach(function (item) {
+    itemsHeight += item.parentNode.offsetHeight;
+  });
+
+  // Should we auto-collapse any nav items? Try to find the smallest item
+  // that can be collapsed to show all items on the screen. If not possible,
+  // then collapse the largest item and do it again. First, sort the items
+  // by height from smallest to largest.
+  var sortedItems = itemsArray.sort(function (a, b) {
+    return a.parentNode.offsetHeight - b.parentNode.offsetHeight;
+  });
+
+  while (sortedItems.length && itemsHeight > windowHeight) {
+    for (var i = 0; i < sortedItems.length; i++) {
+      // Will collapsing this item help?
+      var itemHeight = sortedItems[i].nextSibling.offsetHeight;
+      if ((itemsHeight - itemHeight <= windowHeight) || i === sortedItems.length - 1) {
+        // It will, so let's collapse it, remove its content height from
+        // our total and then remove it from our list of candidates
+        // that can be collapsed.
+        itemsHeight -= itemHeight;
+        toggleCollapseNav({target: sortedItems[i].children[0]}, true);
+        sortedItems.splice(i, 1);
+        break;
+      }
+    }
+  }
+}
+
+/*
+  Initialize the interactive functionality of the page.
+*/
+function init() {
+    var i, j;
+
+    // Make collapse buttons clickable
+    var buttons = document.querySelectorAll('.collapse-button');
+    for (i = 0; i < buttons.length; i++) {
+        buttons[i].onclick = toggleCollapseButton;
+
+        // Show by default? Then toggle now.
+        if (buttons[i].className.indexOf('show') !== -1) {
+            toggleCollapseButton({target: buttons[i].children[0]});
+        }
+    }
+
+    var responseCodes = document.querySelectorAll('.example-names');
+    for (i = 0; i < responseCodes.length; i++) {
+        var tabButtons = childrenByClass(responseCodes[i], 'tab-button');
+        for (j = 0; j < tabButtons.length; j++) {
+            tabButtons[j].onclick = toggleTabButton;
+
+            // Show by default?
+            if (j === 0) {
+                toggleTabButton({target: tabButtons[j]});
+            }
+        }
+    }
+
+    // Make nav items clickable to collapse/expand their content.
+    var navItems = document.querySelectorAll('nav .resource-group .heading');
+    for (i = 0; i < navItems.length; i++) {
+        navItems[i].onclick = toggleCollapseNav;
+
+        // Show all by default
+        toggleCollapseNav({target: navItems[i].children[0]});
+    }
+}
+
+// Initial call to set up buttons
+init();
+
+window.onload = function () {
+    autoCollapse();
+    // Remove the `preload` class to enable animations
+    document.querySelector('body').className = '';
+};
+</script></body></html>
